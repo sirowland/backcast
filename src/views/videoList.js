@@ -11,14 +11,16 @@ var VideoListView = Backbone.View.extend({
     this.$el.children().detach();
     this.$el.html(this.template());
     
-    this.$el.find('div').append(this.data.map(function(video) {
-      var newVid = new VideoListEntryView({model: video});
-      return newVid.el;
-    }));
+    // this.data.map(function(video) {
+    //   var newVid = new VideoListEntryView({model: video});
+    //   this.$el.append(newVid.el);
     
-    // _.each(this.data, function(video) {
-    //   new VideoListEntryView({model: video});
-    // }); 
+    var $that = this.$el;
+    
+    _.each(this.data, function(video) {
+      var newVid = new VideoListEntryView({model: video});
+      $that.append(newVid.el.children[0]);
+    }); 
     return this;
   },
 
